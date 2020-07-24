@@ -1,10 +1,6 @@
 # Adding config file
 config.py
 
-# Adding csv files
-ratings.csv
-movies_metadata.csv
-Movies-ETL.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
