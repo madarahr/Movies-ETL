@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
+# %%
 import json
 import pandas as pd
 import numpy as np
@@ -15,15 +10,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-# In[2]:
-
-
+# %%
 file = 'C:/Users/rahul/Desktop/Class Folder/Movies-ETL'
 
 
-# In[3]:
-
-
+# %%
 def wiki_movies(file):
     wiki_movies_raw = json.load(open(f'{file}/wikipedia.movies.json', mode='r'))
     wiki_movies = [movie for movie in wiki_movies_raw
@@ -221,9 +212,7 @@ def wiki_movies(file):
     return wiki_movies_df
 
 
-# In[4]:
-
-
+# %%
 def kaggle(file):
     kaggle_metadata = pd.read_csv(f'{file}/movies_metadata.csv')
     #  remove the bad data
@@ -248,9 +237,7 @@ def kaggle(file):
     return kaggle_metadata
 
 
-# In[5]:
-
-
+# %%
 def merge(wiki_movies_df, kaggle_metadata):
     
     movies_df = pd.merge(wiki_movies_df, kaggle_metadata, on='imdb_id', suffixes=['_wiki','_kaggle'])
@@ -313,9 +300,7 @@ def merge(wiki_movies_df, kaggle_metadata):
     return movies_df
 
 
-# In[6]:
-
-
+# %%
 def ratings(file, movies_df):
     
     ratings = pd.read_csv(f'{file}/ratings.csv')
@@ -344,9 +329,7 @@ def ratings(file, movies_df):
     return
 
 
-# In[7]:
-
-
+# %%
 def export(file, movies_df):
     db_string = f"postgres://postgres:{db_password}@127.0.0.1:5432/movie_data"
     engine = create_engine(db_string)
@@ -376,9 +359,7 @@ def export(file, movies_df):
         return
 
 
-# In[8]:
-
-
+# %%
 def Challenge(file):
 
     wiki_movies(file)
@@ -397,8 +378,7 @@ def Challenge(file):
     return
 
 
-# In[9]:
-
-
+# %%
 Challenge(file)
+
 
